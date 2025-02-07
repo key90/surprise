@@ -43,6 +43,7 @@
             top: 0;
             left: 0;
             overflow: hidden;
+            pointer-events: none;
         }
         .heart {
             width: 120px;
@@ -53,7 +54,7 @@
             animation: heartbeat 1.2s infinite;
             opacity: 0;
             transition: opacity 1s ease-in-out;
-            left: -80px;
+            left: -40px;
         }
         .heart:before,
         .heart:after {
@@ -84,8 +85,7 @@
             height: 12px;
             background-color: red;
             transform: rotate(-45deg);
-            position: absolute;
-            animation: fall 4s linear infinite;
+            animation: fall 6s linear infinite;
         }
         .falling-heart:before,
         .falling-heart:after {
@@ -99,16 +99,16 @@
         .falling-heart:before { top: -6px; left: 0; }
         .falling-heart:after { left: 6px; top: 0; }
         @keyframes fall {
-            0% { transform: translateY(-10vh) rotate(-45deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(-45deg); opacity: 0; }
+            0% { transform: translateY(-10vh) rotate(-45deg) scale(1); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(-45deg) scale(1.5); opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <button class="play-button" onclick="revealSurprise()">Нажми</button>
+    <button class="play-button" onclick="revealSurprise()">нажми</button>
     <div class="heart-container" id="heartContainer"></div>
     <div class="heart" id="heart"></div>
-    <div class="message" id="message">Ты самая удивительная девушка на свете! 💖</div>
+    <div class="message" id="message">Дарина, ты самая удивительная девушка на свете! 💖</div>
     <audio id="bg-music" src="https://www.bensound.com/bensound-music/bensound-romantic.mp3"></audio>
     <script>
         function revealSurprise() {
@@ -121,16 +121,16 @@
             button.style.display = "none";
             document.body.style.backgroundColor = "#6a11cb";
             
-            for (let i = 0; i < 1000; i++) {
+            for (let i = 0; i < 2000; i++) {
                 let fallingHeart = document.createElement("div");
                 fallingHeart.classList.add("falling-heart");
                 fallingHeart.style.left = Math.random() * 100 + "vw";
-                fallingHeart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+                fallingHeart.style.animationDuration = (Math.random() * 4 + 3) + "s";
                 fallingHeart.style.width = Math.random() * 20 + 5 + "px";
                 fallingHeart.style.height = fallingHeart.style.width;
                 fallingHeart.style.backgroundColor = ["red", "pink", "white", "lightgreen"][Math.floor(Math.random() * 4)];
                 heartContainer.appendChild(fallingHeart);
-                setTimeout(() => fallingHeart.remove(), 4000);
+                setTimeout(() => fallingHeart.remove(), 6000);
             }
             
             setTimeout(() => {
