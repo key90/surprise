@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сюрприз для тебя</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4, #ffdde1);
+            background-size: 300% 300%;
+            animation: bgAnimation 6s infinite alternate;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        @keyframes bgAnimation {
+            0% { background-position: left top; }
+            100% { background-position: right bottom; }
+        }
+        .heart {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: relative;
+            transform: rotate(-45deg);
+            animation: heartbeat 1.2s infinite;
+        }
+        .heart:before,
+        .heart:after {
+            content: "";
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .heart:before { top: -50px; left: 0; }
+        .heart:after { left: 50px; top: 0; }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1) rotate(-45deg); }
+            50% { transform: scale(1.2) rotate(-45deg); }
+        }
+        .message {
+            font-size: 24px;
+            color: white;
+            opacity: 0;
+            animation: fadeIn 3s ease-in forwards;
+            margin-top: 20px;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="heart"></div>
+        <div class="message">Ты самая удивительная девушка на свете! 💖</div>
+    </div>
+    <audio id="bg-music" src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" autoplay loop></audio>
+</body>
+</html>
