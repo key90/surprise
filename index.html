@@ -54,7 +54,9 @@
             animation: heartbeat 1.2s infinite;
             opacity: 0;
             transition: opacity 1s ease-in-out;
-            left: -40px;
+            left: 50%;
+            top: 35%;
+            transform: translate(-50%, -50%) rotate(-45deg);
         }
         .heart:before,
         .heart:after {
@@ -68,11 +70,11 @@
         .heart:before { top: -60px; left: 0; }
         .heart:after { left: 60px; top: 0; }
         @keyframes heartbeat {
-            0%, 100% { transform: scale(1) rotate(-45deg); }
-            50% { transform: scale(1.3) rotate(-45deg); }
+            0%, 100% { transform: scale(1) translate(-50%, -50%) rotate(-45deg); }
+            50% { transform: scale(1.3) translate(-50%, -50%) rotate(-45deg); }
         }
         .message {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: bold;
             opacity: 0;
             transition: opacity 2s ease-in-out;
@@ -81,26 +83,26 @@
         }
         .falling-heart {
             position: absolute;
-            width: 12px;
-            height: 12px;
+            width: 8px;
+            height: 8px;
             background-color: red;
             transform: rotate(-45deg);
-            animation: fall 6s linear infinite;
+            animation: fall 3s linear forwards;
         }
         .falling-heart:before,
         .falling-heart:after {
             content: "";
-            width: 12px;
-            height: 12px;
+            width: 8px;
+            height: 8px;
             background-color: inherit;
             border-radius: 50%;
             position: absolute;
         }
-        .falling-heart:before { top: -6px; left: 0; }
-        .falling-heart:after { left: 6px; top: 0; }
+        .falling-heart:before { top: -4px; left: 0; }
+        .falling-heart:after { left: 4px; top: 0; }
         @keyframes fall {
             0% { transform: translateY(-10vh) rotate(-45deg) scale(1); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(-45deg) scale(1.5); opacity: 0; }
+            100% { transform: translateY(110vh) rotate(-45deg) scale(1); opacity: 0; }
         }
     </style>
 </head>
@@ -121,23 +123,25 @@
             button.style.display = "none";
             document.body.style.backgroundColor = "#6a11cb";
             
-            for (let i = 0; i < 2000; i++) {
-                let fallingHeart = document.createElement("div");
-                fallingHeart.classList.add("falling-heart");
-                fallingHeart.style.left = Math.random() * 100 + "vw";
-                fallingHeart.style.animationDuration = (Math.random() * 4 + 3) + "s";
-                fallingHeart.style.width = Math.random() * 20 + 5 + "px";
-                fallingHeart.style.height = fallingHeart.style.width;
-                fallingHeart.style.backgroundColor = ["red", "pink", "white", "lightgreen"][Math.floor(Math.random() * 4)];
-                heartContainer.appendChild(fallingHeart);
-                setTimeout(() => fallingHeart.remove(), 6000);
+            for (let i = 0; i < 3000; i++) {
+                setTimeout(() => {
+                    let fallingHeart = document.createElement("div");
+                    fallingHeart.classList.add("falling-heart");
+                    fallingHeart.style.left = Math.random() * 100 + "vw";
+                    fallingHeart.style.animationDuration = (Math.random() * 2 + 1.5) + "s";
+                    fallingHeart.style.width = Math.random() * 15 + 5 + "px";
+                    fallingHeart.style.height = fallingHeart.style.width;
+                    fallingHeart.style.backgroundColor = ["red", "pink", "white", "lightgreen"][Math.floor(Math.random() * 4)];
+                    heartContainer.appendChild(fallingHeart);
+                    setTimeout(() => fallingHeart.remove(), 3000);
+                }, i * 2);
             }
             
             setTimeout(() => {
                 heart.style.opacity = "1";
                 message.style.opacity = "1";
                 audio.play().catch(error => console.log("Автовоспроизведение запрещено:", error));
-            }, 2000);
+            }, 3000);
         }
     </script>
 </body>
